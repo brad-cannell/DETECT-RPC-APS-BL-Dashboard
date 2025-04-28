@@ -5,6 +5,7 @@ format:
     dashboard:
         logo: assets/img/detect-logo.png
         theme: simplex
+        output-file: index.html
 ---
 
 ```{r}
@@ -442,7 +443,7 @@ chart_10 <- ggplot(
         linetype = "dashed",
         color = "darkblue"
     ) +
-    guide_axis(minor.ticks = FALSE)
+    scale_y_continuous(guide = guide_axis(minor.ticks = FALSE))
 
 ggplotly(chart_10, tooltip = c("x", "fill", "color"))
 ```
@@ -515,7 +516,7 @@ chart_11 <- ggplot(
     ) +
     theme(legend.position = "none", legend.title = element_blank()) +
     labs(x = element_blank(), y = element_blank()) +
-    guide_axis(minor.ticks = FALSE)
+    scale_y_continuous(guide = guide_axis(minor.ticks = FALSE))
 
 #TODO: NO VLINE YET SINCE TOOL HAS NOT LAUNCHED
 
@@ -596,7 +597,7 @@ chart_12 <- ggplot(
         linetype = "dashed",
         color = "darkblue"
     ) +
-    guide_axis(minor.ticks = FALSE)
+    scale_y_continuous(guide = guide_axis(minor.ticks = FALSE))
 
 ggplotly(chart_12, tooltip = c("x", "fill", "color"))
 ```
@@ -675,7 +676,7 @@ chart_12 <- ggplot(
         linetype = "dashed",
         color = "darkblue"
     ) +
-    guide_axis(minor.ticks = FALSE)
+    scale_y_continuous(guide = guide_axis(minor.ticks = FALSE))
 
 ggplotly(chart_12, tooltip = c("x", "fill", "color"))
 ```
@@ -754,7 +755,7 @@ chart_12 <- ggplot(
         linetype = "dashed",
         color = "darkblue"
     ) +
-    guide_axis(minor.ticks = FALSE)
+    scale_y_continuous(guide = guide_axis(minor.ticks = FALSE))
 
 ggplotly(chart_12, tooltip = c("x", "fill", "color"))
 ```
@@ -833,7 +834,7 @@ chart_12 <- ggplot(
         linetype = "dashed",
         color = "darkblue"
     ) +
-    guide_axis(minor.ticks = FALSE)
+    scale_y_continuous(guide = guide_axis(minor.ticks = FALSE))
 
 ggplotly(chart_12, tooltip = c("x", "fill", "color"))
 ```
@@ -912,7 +913,7 @@ chart_12 <- ggplot(
         linetype = "dashed",
         color = "darkblue"
     ) +
-    guide_axis(minor.ticks = FALSE)
+    scale_y_continuous(guide = guide_axis(minor.ticks = FALSE))
 
 ggplotly(chart_12, tooltip = c("x", "fill"))
 ```
