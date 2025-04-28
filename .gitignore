@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+.Rprofile
+
+renv
+
+.Renviron
+
+assets/data/
+*.Rproj
