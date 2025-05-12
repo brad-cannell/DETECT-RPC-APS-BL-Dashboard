@@ -18,7 +18,7 @@ Welcome to the DETECT RPC APS BL Dashboard project! This documentation guides ne
 
 ## Introduction
 
-The DETECT RPC APS BL Dashboard project provides a Quarto dashboard to efficiently monitor new and existing submission for the APS Baseline data.
+The DETECT RPC APS BL Dashboard project provides a Quarto dashboard to efficiently monitor new and existing submissions for the APS Baseline data.
 
 ---
 
@@ -106,7 +106,7 @@ quarto render
 
 ### Step 2: View in Browser
 
-* Open the generated HTML file in your browser. It is the file names 
+* Open the generated HTML file in your browser. It is the file named
 `index.html` at the project root.
 
 ---
