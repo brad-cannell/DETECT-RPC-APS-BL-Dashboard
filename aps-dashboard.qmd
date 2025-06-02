@@ -1,6 +1,7 @@
 ---
 title: APS Baseline
 author: ""
+date: today
 format:
     dashboard:
         logo: assets/img/detect-logo.png
@@ -24,6 +25,10 @@ DATA <- fs::as_fs_path("assets/data/APS-DATA.duckdb")
 
 con <- dbConnect(duckdb(), dbdir = DATA, read_only = TRUE)
 ```
+
+# {.sidebar}
+
+Dashboard last updated: {{< meta date >}}
 
 # Submission Details
 
