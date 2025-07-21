@@ -1290,7 +1290,7 @@ func_status_plot <- as.data.frame(dbGetQuery(
         WHEN ar_functional_status___5 = 1 THEN 5
         WHEN ar_functional_status___98 =  1 THEN 98
         WHEN ar_functional_status___77 = 1 THEN 77
-        ELSE 'Unknown'
+        ELSE NULL
         END as func_status
     FROM 'APS-BL'
     GROUP BY func_status
