@@ -140,7 +140,7 @@ subs_over_time <- as.data.frame(dbGetQuery(
     "SELECT
         form_id AS sub,
         ar_institution AS institution,
-        ar_date AS date
+        ar_aps_report_date AS date
     FROM 'APS-BL'
     ORDER BY date ASC;
     "
@@ -225,31 +225,31 @@ pre_total_subs_by_rand <- as.data.frame(dbGetQuery(
     SELECT clinician_id, COUNT(form_id) AS num
     FROM (
         SELECT ar_clinician_bcm AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_bcm IS NOT NULL AND ar_date < '2025-03-26'
+        WHERE ar_clinician_bcm IS NOT NULL AND ar_aps_report_date < '2025-03-26'
         UNION ALL
 
         SELECT ar_clinician_jh AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_jh IS NOT NULL AND ar_date < '2025-04-04'
+        WHERE ar_clinician_jh IS NOT NULL AND ar_aps_report_date < '2025-04-04'
         UNION ALL
 
         SELECT ar_clinician_ucsf AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_ucsf IS NOT NULL AND ar_date < '2025-03-26'
+        WHERE ar_clinician_ucsf IS NOT NULL AND ar_aps_report_date < '2025-03-26'
         UNION ALL
 
         SELECT ar_clinician_uab AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_uab IS NOT NULL AND ar_date < '2025-03-18'
+        WHERE ar_clinician_uab IS NOT NULL AND ar_aps_report_date < '2025-03-18'
         UNION ALL
 
         SELECT ar_clinician_utsw AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_utsw IS NOT NULL AND ar_date < '2025-04-04'
+        WHERE ar_clinician_utsw IS NOT NULL AND ar_aps_report_date < '2025-04-04'
         UNION ALL
 
         SELECT ar_clinician_lbj AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_lbj IS NOT NULL AND ar_date < '2025-03-26'
+        WHERE ar_clinician_lbj IS NOT NULL AND ar_aps_report_date < '2025-03-26'
         UNION ALL
 
         SELECT ar_clinician_utp AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_utp IS NOT NULL AND ar_date < '2025-03-13'
+        WHERE ar_clinician_utp IS NOT NULL AND ar_aps_report_date < '2025-03-13'
     ) AS combined
     GROUP BY clinician_id;
     "
@@ -275,31 +275,31 @@ post_total_subs_by_rand <- as.data.frame(dbGetQuery(
     SELECT clinician_id, COUNT(form_id) AS num
     FROM (
         SELECT ar_clinician_bcm AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_bcm IS NOT NULL AND ar_date >= '2025-03-26'
+        WHERE ar_clinician_bcm IS NOT NULL AND ar_aps_report_date >= '2025-03-26'
         UNION ALL
 
         SELECT ar_clinician_jh AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_jh IS NOT NULL AND ar_date >= '2025-04-04'
+        WHERE ar_clinician_jh IS NOT NULL AND ar_aps_report_date >= '2025-04-04'
         UNION ALL
 
         SELECT ar_clinician_ucsf AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_ucsf IS NOT NULL AND ar_date >= '2025-03-26'
+        WHERE ar_clinician_ucsf IS NOT NULL AND ar_aps_report_date >= '2025-03-26'
         UNION ALL
 
         SELECT ar_clinician_uab AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_uab IS NOT NULL AND ar_date >= '2025-03-18'
+        WHERE ar_clinician_uab IS NOT NULL AND ar_aps_report_date >= '2025-03-18'
         UNION ALL
 
         SELECT ar_clinician_utsw AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_utsw IS NOT NULL AND ar_date >= '2025-04-04'
+        WHERE ar_clinician_utsw IS NOT NULL AND ar_aps_report_date >= '2025-04-04'
         UNION ALL
 
         SELECT ar_clinician_lbj AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_lbj IS NOT NULL AND ar_date >= '2025-03-26'
+        WHERE ar_clinician_lbj IS NOT NULL AND ar_aps_report_date >= '2025-03-26'
         UNION ALL
 
         SELECT ar_clinician_utp AS clinician_id, form_id FROM 'APS-BL'
-        WHERE ar_clinician_utp IS NOT NULL AND ar_date >= '2025-03-13'
+        WHERE ar_clinician_utp IS NOT NULL AND ar_aps_report_date >= '2025-03-13'
     ) AS combined
     GROUP BY clinician_id;
     "
@@ -420,7 +420,7 @@ bcm_random_plot <- as.data.frame(dbGetQuery(
     con,
     "SELECT
         COUNT(form_id) AS num,
-        ar_date as date,
+        ar_aps_report_date as date,
         ar_clinician_bcm AS clinician_id
     FROM 'APS-BL'
     WHERE ar_institution == 1
@@ -498,7 +498,7 @@ jh_random_plot <- as.data.frame(dbGetQuery(
     con,
     "SELECT
         COUNT(form_id) AS num,
-        ar_date as date,
+        ar_aps_report_date as date,
         ar_clinician_jh AS clinician_id
     FROM 'APS-BL'
     WHERE ar_institution == 2
@@ -574,7 +574,7 @@ ucsf_random_plot <- as.data.frame(dbGetQuery(
     con,
     "SELECT
         COUNT(form_id) AS num,
-        ar_date as date,
+        ar_aps_report_date as date,
         ar_clinician_ucsf AS clinician_id
     FROM 'APS-BL'
     WHERE ar_institution == 3
@@ -653,7 +653,7 @@ uab_random_plot <- as.data.frame(dbGetQuery(
     con,
     "SELECT
         COUNT(form_id) AS num,
-        ar_date as date,
+        ar_aps_report_date as date,
         ar_clinician_uab AS clinician_id
     FROM 'APS-BL'
     WHERE ar_institution == 4
@@ -732,7 +732,7 @@ utsw_random_plot <- as.data.frame(dbGetQuery(
     con,
     "SELECT
         COUNT(form_id) AS num,
-        ar_date as date,
+        ar_aps_report_date as date,
         ar_clinician_utsw AS clinician_id
     FROM 'APS-BL'
     WHERE ar_institution == 5
@@ -811,7 +811,7 @@ lbj_random_plot <- as.data.frame(dbGetQuery(
     con,
     "SELECT
         COUNT(form_id) AS num,
-        ar_date as date,
+        ar_aps_report_date as date,
         ar_clinician_lbj AS clinician_id
     FROM 'APS-BL'
     WHERE ar_institution == 6
@@ -890,7 +890,7 @@ utp_random_plot <- as.data.frame(dbGetQuery(
     con,
     "SELECT
         COUNT(form_id) AS num,
-        ar_date as date,
+        ar_aps_report_date as date,
         ar_clinician_utp AS clinician_id
     FROM 'APS-BL'
     WHERE ar_institution == 7
