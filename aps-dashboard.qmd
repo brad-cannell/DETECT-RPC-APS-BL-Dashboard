@@ -138,22 +138,31 @@ ggplotly(chart_1, tooltip = c("x", "fill"))
 subs_over_time <- as.data.frame(dbGetQuery(
     con,
     "SELECT
-        form_id AS sub,
-        ar_institution AS institution,
-        ar_aps_report_date AS date
-    FROM 'APS-BL'
-    ORDER BY date ASC;
+        t.form_id AS sub,
+        t.ar_institution AS institution,
+        t.ar_aps_report_date AS date,
+        COUNT(*) OVER (
+    ORDER BY
+        t.ar_aps_report_date
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS cum_submissions
+    FROM
+	    'APS-BL' AS t
+    WHERE
+	    t.ar_aps_report_date IS NOT NULL
+    ORDER BY
+	    date
     "
 ))
 
 # replace uninformative columns with string names
 subs_over_time <- subs_over_time |>
     left_join(institution, by = "institution") |>
-    select(sub, date, institution_label)
+    select(sub, cum_submissions, date, institution_label)
 
 chart_2 <- ggplot(
     data = subs_over_time,
-    aes(x = date, y = sub, color = institution_label)
+    aes(x = date, y = cum_submissions, color = institution_label)
 ) +
     geom_point() +
     theme(legend.position = "none", legend.title = element_blank()) +
