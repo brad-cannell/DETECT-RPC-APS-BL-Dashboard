@@ -138,18 +138,18 @@ ggplotly(chart_1, tooltip = c("x", "fill"))
 subs_over_time <- as.data.frame(dbGetQuery(
     con,
     "SELECT
-        t.form_id AS sub,
-        t.ar_institution AS institution,
-        t.ar_aps_report_date AS date,
+        form_id AS sub,
+        ar_institution AS institution,
+        ar_aps_report_date AS date,
         COUNT(*) OVER (
     ORDER BY
-        t.ar_aps_report_date
+        ar_aps_report_date
         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
     ) AS cum_submissions
     FROM
-	    'APS-BL' AS t
+	    'APS-BL'
     WHERE
-	    t.ar_aps_report_date IS NOT NULL
+	    ar_aps_report_date IS NOT NULL
     ORDER BY
 	    date
     "
