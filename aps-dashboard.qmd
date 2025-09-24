@@ -17,6 +17,7 @@ library(dplyr)
 library(DT)
 library(duckdb)
 library(plotly)
+library(tidyr)
 
 # source the codebook
 source("codebook.r")
@@ -181,7 +182,7 @@ ggplotly(chart_2)
 #| echo: false
 
 # total submissions by randomization status
-total_subs_by_rand <- as.data.frame(dbGetQuery(
+total_subs_by_rand_sql <- as.data.frame(dbGetQuery(
     con,
     "
     SELECT clinician_id, COUNT(form_id) as num
@@ -214,12 +215,24 @@ all_clinicians <- rbind(
     utp_clinician
 )
 
-total_subs_by_rand <- total_subs_by_rand |>
+no_site_champs <- all_clinicians |>
+    filter(!clinician_name %in% user$site_champ_label[1:7])
+
+total_subs_by_rand <- total_subs_by_rand_sql |>
     left_join(all_clinicians, by = "clinician_id") |>
     select(num, clinician_name, clinician_randomized)
 
 total_subs_by_rand <- total_subs_by_rand |>
     group_by(clinician_randomized) |>
+    summarise(num = sum(num))
+
+total_subs_by_rand_no_sc <- total_subs_by_rand_sql |>
+    left_join(no_site_champs, by = "clinician_id") |>
+    select(num, clinician_name, clinician_randomized)
+
+total_subs_by_rand_no_sc <- total_subs_by_rand_no_sc |>
+    group_by(clinician_randomized) |>
+    drop_na() |>
     summarise(num = sum(num))
 ```
 
@@ -228,7 +241,7 @@ total_subs_by_rand <- total_subs_by_rand |>
 #| echo: false
 
 # pre-launch submission by randomization status
-pre_total_subs_by_rand <- as.data.frame(dbGetQuery(
+pre_total_subs_by_rand_sql <- as.data.frame(dbGetQuery(
     con,
     "
     SELECT clinician_id, COUNT(form_id) AS num
@@ -264,12 +277,21 @@ pre_total_subs_by_rand <- as.data.frame(dbGetQuery(
     "
 ))
 
-pre_total_subs_by_rand <- pre_total_subs_by_rand |>
+pre_total_subs_by_rand <- pre_total_subs_by_rand_sql |>
     left_join(all_clinicians, by = "clinician_id") |>
     select(num, clinician_name, clinician_randomized)
 
 pre_total_subs_by_rand <- pre_total_subs_by_rand |>
     group_by(clinician_randomized) |>
+    summarise(num = sum(num))
+
+pre_total_subs_by_rand_no_sc <- pre_total_subs_by_rand_sql |>
+    left_join(no_site_champs, by = "clinician_id") |>
+    select(num, clinician_name, clinician_randomized)
+
+pre_total_subs_by_rand_no_sc <- pre_total_subs_by_rand_no_sc |>
+    group_by(clinician_randomized) |>
+    drop_na() |>
     summarise(num = sum(num))
 ```
 
@@ -278,7 +300,7 @@ pre_total_subs_by_rand <- pre_total_subs_by_rand |>
 #| echo: false
 
 # post-launch submission by randomization status
-post_total_subs_by_rand <- as.data.frame(dbGetQuery(
+post_total_subs_by_rand_sql <- as.data.frame(dbGetQuery(
     con,
     "
     SELECT clinician_id, COUNT(form_id) AS num
@@ -314,12 +336,21 @@ post_total_subs_by_rand <- as.data.frame(dbGetQuery(
     "
 ))
 
-post_total_subs_by_rand <- post_total_subs_by_rand |>
+post_total_subs_by_rand <- post_total_subs_by_rand_sql |>
     left_join(all_clinicians, by = "clinician_id") |>
     select(num, clinician_name, clinician_randomized)
 
 post_total_subs_by_rand <- post_total_subs_by_rand |>
     group_by(clinician_randomized) |>
+    summarise(num = sum(num))
+
+post_total_subs_by_rand_no_sc <- post_total_subs_by_rand_sql |>
+    left_join(no_site_champs, by = "clinician_id") |>
+    select(num, clinician_name, clinician_randomized)
+
+post_total_subs_by_rand_no_sc <- post_total_subs_by_rand_no_sc |>
+    group_by(clinician_randomized) |>
+    drop_na() |>
     summarise(num = sum(num))
 ```
 
@@ -353,16 +384,18 @@ list(
 )
 ```
 
-### Launch
+### Launch {orientation="rows"}
+
+####
 
 ```{r}
 #| label: valuebox pre-launch total submissions by randomized clinicians
-#| title: Pre-launch Total Submissions by Randomized Clinicians
 #| content: valuebox
 
 list(
     icon = "clipboard-check-fill",
     color = "info",
+    title = "Pre-launch Total Submissions by Randomized Clinicians",
     value = pre_total_subs_by_rand[
         pre_total_subs_by_rand$clinician_randomized == 1,
     ]$num
@@ -371,26 +404,28 @@ list(
 
 ```{r}
 #| label: valuebox pre-launch total submissions by non-randomized clinicians
-#| title: Pre-launch Total Submissions by Non-Randomized Clinicians
 #| content: valuebox
 
 list(
     icon = "clipboard-x-fill",
     color = "info",
+    title = "Pre-launch Total Submissions by Non-Randomized Clinicians",
     value = pre_total_subs_by_rand[
         pre_total_subs_by_rand$clinician_randomized == 0,
     ]$num
 )
 ```
 
+####
+
 ```{r}
 #| label: valuebox post-launch total submissions by randomized clinicians
-#| title: Post-launch Total Submissions by Randomized Clinicians
 #| content: valuebox
 
 list(
     icon = "clipboard-check-fill",
     color = "warning",
+    title = "Post-launch Total Submissions by Randomized Clinicians",
     value = post_total_subs_by_rand[
         post_total_subs_by_rand$clinician_randomized == 1,
     ]$num
@@ -399,7 +434,6 @@ list(
 
 ```{r}
 #| label: valuebox post-launch total submissions by non-randomized clinicians
-#| title: Post-launch Total Submissions by Non-Randomized Clinicians
 #| content: valuebox
 
 value <- post_total_subs_by_rand[
@@ -413,6 +447,73 @@ if (identical(value, numeric(0))) {
 list(
     icon = "clipboard-x-fill",
     color = "warning",
+    title = "Post-launch Total Submissions by Non-Randomized Clinicians",
+    value = value
+)
+```
+
+####
+
+```{r}
+#| label: valuebox pre-launch total submissions by randomized clinicians no site champs
+#| content: valuebox
+
+list(
+    icon = "clipboard-check-fill",
+    color = "info",
+    title = "Pre-launch Total Submissions by Randomized Clinicians (No Site Champions)",
+    value = pre_total_subs_by_rand_no_sc[
+        pre_total_subs_by_rand_no_sc$clinician_randomized == 1,
+    ]$num
+)
+```
+
+```{r}
+#| label: valuebox pre-launch total submissions by non-randomized clinicians no site champs
+#| content: valuebox
+
+list(
+    icon = "clipboard-x-fill",
+    color = "info",
+    title = "Pre-launch Total Submissions by Non-Randomized Clinicians (No Site Champions)",
+    value = pre_total_subs_by_rand_no_sc[
+        pre_total_subs_by_rand_no_sc$clinician_randomized == 0,
+    ]$num
+)
+```
+
+####
+
+```{r}
+#| label: valuebox post-launch total submissions by randomized clinicians no site champs
+#| content: valuebox
+
+list(
+    icon = "clipboard-check-fill",
+    color = "warning",
+    title = "Post-launch Total Submissions by Randomized Clinicians (No Site Champions)",
+    value = post_total_subs_by_rand_no_sc[
+        post_total_subs_by_rand_no_sc$clinician_randomized == 1,
+    ]$num
+)
+```
+
+```{r}
+#| label: valuebox post-launch total submissions by non-randomized clinicians no site champs
+#| content: valuebox
+
+value <- post_total_subs_by_rand_no_sc[
+    post_total_subs_by_rand_no_sc$clinician_randomized == 0,
+]$num
+
+if (identical(value, numeric(0))) {
+    value <- 0
+}
+
+list(
+    icon = "clipboard-x-fill",
+    color = "warning",
+    title = "Post-launch Total Submissions by Non-Randomized Clinicians (No Site Champions)",
     value = value
 )
 ```
