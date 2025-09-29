@@ -7,6 +7,7 @@ format:
         logo: assets/img/detect-logo.png
         theme: simplex
         output-file: index.html
+        orientation: columns
 ---
 
 ```{r}
@@ -31,7 +32,7 @@ con <- dbConnect(duckdb(), dbdir = DATA, read_only = TRUE)
 
 Dashboard last updated: {{< meta date >}}
 
-# Submission Details
+# Submission Details {orientation="rows"}
 
 ```{r}
 #| label: submission value box data
@@ -384,9 +385,9 @@ list(
 )
 ```
 
-### Launch {orientation="rows"}
+### Launch 
 
-####
+#### Row {height="50%"}
 
 ```{r}
 #| label: valuebox pre-launch total submissions by randomized clinicians
@@ -415,8 +416,6 @@ list(
     ]$num
 )
 ```
-
-####
 
 ```{r}
 #| label: valuebox post-launch total submissions by randomized clinicians
@@ -452,7 +451,7 @@ list(
 )
 ```
 
-####
+#### Row {height="50%"}
 
 ```{r}
 #| label: valuebox pre-launch total submissions by randomized clinicians no site champs
@@ -481,8 +480,6 @@ list(
     ]$num
 )
 ```
-
-####
 
 ```{r}
 #| label: valuebox post-launch total submissions by randomized clinicians no site champs
@@ -1067,7 +1064,7 @@ datatable(
     formatPercentage("perc", 2)
 ```
 
-# Demographics
+# Demographics {orientation="rows"}
 
 ## Row {.tabset}
 
@@ -1268,7 +1265,7 @@ datatable(hispanic_plot, colnames = c("Number", "Number (%)", "Hispanic")) |>
     formatPercentage("perc", 2)
 ```
 
-# Clinical
+# Clinical {orientation="rows"}
 
 ## Row {.tabset}
 
