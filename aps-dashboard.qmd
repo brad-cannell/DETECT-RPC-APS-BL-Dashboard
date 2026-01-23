@@ -124,8 +124,12 @@ chart_1 <- ggplot(
     aes(x = total_subs, y = institution_label, fill = site_champ_label)
 ) +
     geom_col() +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     scale_fill_manual(values = colors_user)
 
 ggplotly(chart_1, tooltip = c("x", "fill"))
@@ -167,8 +171,12 @@ chart_2 <- ggplot(
     aes(x = date, y = cum_submissions, color = institution_label)
 ) +
     geom_point() +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     scale_color_manual(values = colors_institution)
 
 ggplotly(chart_2)
@@ -548,8 +556,12 @@ chart_10 <- ggplot(
         aes(fill = clinician_randomized, color = clinician_name, size = 5),
         position = "stack"
     ) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     geom_vline(
         xintercept = as.numeric(as.Date("03/26/2025", format = "%m/%d/%Y")),
         linetype = "dashed",
@@ -626,8 +638,12 @@ chart_11 <- ggplot(
         aes(fill = clinician_randomized, color = clinician_name, size = 5),
         position = "stack"
     ) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     scale_y_continuous(guide = guide_axis(minor.ticks = FALSE))
 
 #TODO: NO VLINE YET SINCE TOOL HAS NOT LAUNCHED
@@ -702,8 +718,12 @@ chart_12 <- ggplot(
         aes(fill = clinician_randomized, color = clinician_name, size = 5),
         position = position_dodge2(width = 10, preserve = "total")
     ) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     geom_vline(
         xintercept = as.numeric(as.Date("04/21/2025", format = "%m/%d/%Y")),
         linetype = "dashed",
@@ -781,8 +801,12 @@ chart_12 <- ggplot(
         aes(fill = clinician_randomized, color = clinician_name, size = 5),
         position = position_dodge2(width = 10, preserve = "total")
     ) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     geom_vline(
         xintercept = as.numeric(as.Date("03/18/2025", format = "%m/%d/%Y")),
         linetype = "dashed",
@@ -860,8 +884,12 @@ chart_12 <- ggplot(
         aes(fill = clinician_randomized, color = clinician_name, size = 5),
         position = position_dodge2(width = 10, preserve = "total")
     ) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     geom_vline(
         xintercept = as.numeric(as.Date("04/04/2025", format = "%m/%d/%Y")),
         linetype = "dashed",
@@ -939,8 +967,12 @@ chart_12 <- ggplot(
         aes(fill = clinician_randomized, color = clinician_name, size = 5),
         position = position_dodge2(width = 10, preserve = "total")
     ) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     geom_vline(
         xintercept = as.numeric(as.Date("03/26/2025", format = "%m/%d/%Y")),
         linetype = "dashed",
@@ -1018,8 +1050,12 @@ chart_12 <- ggplot(
         aes(fill = clinician_randomized, color = clinician_name, size = 5),
         position = position_dodge2(width = 10, preserve = "total")
     ) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     geom_vline(
         xintercept = as.numeric(as.Date("03/13/2025", format = "%m/%d/%Y")),
         linetype = "dashed",
@@ -1098,8 +1134,12 @@ chart_3 <- ggplot(
     aes(y = gender_label, x = num)
 ) +
     geom_col(aes(fill = gender_label)) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     scale_fill_brewer(palette = "Dark2", na.value = "grey50")
 
 
@@ -1144,8 +1184,12 @@ chart_4 <- ggplot(
     aes(y = rel_status_label, x = num)
 ) +
     geom_col(aes(fill = rel_status_label)) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     scale_fill_brewer(palette = "Dark2", na.value = "grey50")
 
 
@@ -1202,8 +1246,12 @@ chart_5 <- ggplot(
     aes(y = race_label, x = num)
 ) +
     geom_col(aes(fill = race_label)) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     scale_fill_brewer(palette = "Dark2", na.value = "grey50")
 
 
@@ -1248,8 +1296,12 @@ chart_6 <- ggplot(
     aes(y = hispanic_label, x = num)
 ) +
     geom_col(aes(fill = hispanic_label)) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     scale_fill_brewer(palette = "Dark2", na.value = "grey50")
 
 
@@ -1300,8 +1352,12 @@ chart_7 <- ggplot(
     aes(x = num_visits, y = reason_label)
 ) +
     geom_col(aes(fill = reason_label)) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     scale_fill_brewer(palette = "Dark2", na.value = "grey50")
 
 ggplotly(chart_7, tooltip = c("x"))
@@ -1356,8 +1412,12 @@ chart_8 <- ggplot(
     aes(x = num, y = cog_imp_label)
 ) +
     geom_col(aes(fill = cog_imp_label)) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     scale_fill_brewer(palette = "Dark2", na.value = "grey50")
 
 ggplotly(chart_8, tooltip = c("x"))
@@ -1415,8 +1475,12 @@ chart_9 <- ggplot(
     aes(x = num, y = func_status_label)
 ) +
     geom_col(aes(fill = func_status_label)) +
-    theme(legend.position = "none", legend.title = element_blank()) +
-    labs(x = element_blank(), y = element_blank()) +
+    theme(
+      legend.position = "none", 
+      legend.title = element_blank(),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank()
+    ) +
     scale_fill_brewer(palette = "Dark2", na.value = "grey50")
 
 ggplotly(chart_9, tooltip = c("x"))
