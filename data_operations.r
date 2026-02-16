@@ -4,7 +4,7 @@ library(REDCapR)
 
 #### Functions
 
-get_data <- function(token = Sys.getenv("REDCAP_API_TOKEN")) {
+get_data <- function(token = keyring::key_get("aps_reports_redcap_api")) {
     redcap_read(
         redcap_uri = "https://redcap.uth.tmc.edu/api/",
         token = token,
