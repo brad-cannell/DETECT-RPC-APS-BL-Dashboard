@@ -149,3 +149,30 @@ git push origin feature/your-feature-name
 
 ---
 
+# Dashboard Updates
+
+> [!NOTE]
+> This section assumes that you have already completed all setup steps. If you haven't, please review **Quick Setup** or refer to the [wiki](https://github.com/brad-cannell/DETECT-RPC-APS-BL-Dashboard/wiki).
+
+1. Open the repository locally.
+2. Submit in terminal:
+    1. `rscript data_operations.r`
+    2. `quarto render aps-dashboard.qmd`
+3. Commit and push: "DATE Dashboard Update"
+
+Create instructions for:
+- Storing locally
+    - Don't use Box/Dropbox/Google Drive
+- Keyring
+    - Create
+    - Set
+    - Get
+- renv
+    - Set locally
+    - Use locally
+    - See the "Collaboration" section of https://rstudio.github.io/renv/articles/renv.html
+
+API Keys needed:
+- DETECT-RPC Tool Data
+    - REDCap: https://redcap.uth.tmc.edu/index.php
+    - Project: DETECT-RPC APS Reporting
