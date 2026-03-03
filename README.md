@@ -33,7 +33,7 @@ The DETECT RPC APS BL Dashboard project provides a Quarto dashboard to efficient
 ### Software Requirements:
 
 * [R](https://cran.r-project.org/) (version 4.5)
-* [RStudio](https://posit.co/download/rstudio-desktop/) (latest version)
+* [Positron](https://positron.posit.co/) **OR** [RStudio](https://posit.co/download/rstudio-desktop/) IDE (latest version)
 * [Quarto](https://quarto.org/docs/get-started/) (version 1.7.\*)
 * [Git](https://git-scm.com/downloads) (latest version)
 
@@ -79,7 +79,7 @@ cd DETECT-RPC-APS-BL-Dashboard
 ```
 
 > [!NOTE]
-> Don't clone to a cloud storage folder (Box, Dropbox, Google Drive, OneDrive, etc.)
+> Don't clone to a cloud storage folder (Box, Dropbox, Google Drive, OneDrive, etc.). File-locking and sync conflicts can corrupt the renv library.
 
 ### Step 2: Open in the IDE
 
@@ -96,6 +96,9 @@ renv::restore()
 
 This project uses [renv](https://rstudio.github.io/renv/articles/renv.html) to manage project package dependencies. Click the link for more details.
 
+> [!NOTE]
+> `renv::restore()` may take several minutes and requires an active internet connection.
+
 ### Step 4: Request an API Key
 
 [Instructions for requesting API keys](https://github.com/brad-cannell/r33_dashboards/wiki/DETECT%E2%80%90RPC-Data#accessing-data-through-api)
@@ -105,22 +108,26 @@ API Keys needed:
     - REDCap: https://redcap.uth.tmc.edu/index.php
     - Project: DETECT-RPC APS Reporting
 
-### Step 4: Add Your API Key to Keyring
+### Step 5: Add Your API Key to Keyring
 
 ```r
 keyring::key_set("aps_reports_redcap_api")
 ```
 
+[Click for additional information about the keyring package](https://keyring.r-lib.org/)
+
 ---
 
 ## Building the Dashboard
+
+This section assumes you have already successfully completed all of the installation and project setup steps above.
 
 ### Step 1: Render the Dashboard
 
 In the IDE, navigate to the project root and run:
 
 ```shell
-rscript data_operations.r
+rscript data_operations.R
 quarto render aps-dashboard.qmd
 ```
 
@@ -133,6 +140,7 @@ quarto render aps-dashboard.qmd
 ```shell
 git add .
 git commit -m "YYYY-MM-DD Dashboard Update"
+git push
 ```
 
 ---
