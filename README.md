@@ -45,15 +45,15 @@ Follow these steps to install necessary software:
 
 ### Step 1: Install R
 
-* Download and install R 4.5 from [CRAN](https://cran.r-project.org/)
+* Download and install R from [CRAN](https://cran.r-project.org/)
 
-### Step 2: Install RStudio
+### Step 2: Install an IDE (RStudio or Positron)
 
-* Download and install the latest version from [RStudio](https://posit.co/download/rstudio-desktop/)
+* Download and install the latest version of RStudio or Positron from [Posit](https://posit.co/)
 
 ### Step 3: Install Quarto
 
-* Download and install Quarto 1.7.\* from [Quarto](https://quarto.org/docs/get-started/)
+* Download and install Quarto from [Quarto](https://quarto.org/docs/get-started/)
 
 ### Step 4: Install Git
 
@@ -78,18 +78,27 @@ git clone https://github.com/brad-cannell/DETECT-RPC-APS-BL-Dashboard.git
 cd DETECT-RPC-APS-BL-Dashboard
 ```
 
-### Step 2: Open in RStudio
+### Step 2: Open in the IDE
 
-* Open RStudio and navigate to `File > Open Project...`
-* Select `DETECT-RPC-APS-BL-Dashboard.Rproj`
+* Open DETECT-RPC-APS-BL-Dashboard in the IDE.
 
 ### Step 3: Install Project Dependencies
 
-In RStudio console:
+In the R console:
 
 ```r
 install.packages('renv')
 renv::restore()
+```
+
+### Step 4: Request an API Key
+
+[Add instructons](https://github.com/brad-cannell/DETECT-RPC-APS-BL-Dashboard/wiki#obtaining-a-redcap-api-token)
+
+### Step 4: Add Your API Key to Keyring
+
+```r
+keyring::key_set("aps_reports_redcap_api")
 ```
 
 ---
@@ -98,16 +107,16 @@ renv::restore()
 
 ### Step 1: Render the Dashboard
 
-In RStudio, navigate to the project root and run:
+In the IDE, navigate to the project root and run:
 
 ```shell
-quarto render
+rscript data_operations.r
+quarto render aps-dashboard.qmd
 ```
 
 ### Step 2: View in Browser
 
-* Open the generated HTML file in your browser. It is the file named
-`index.html` at the project root.
+* Open the generated HTML file in your browser. It is the file named `index.html` at the project root.
 
 ---
 
