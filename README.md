@@ -78,6 +78,9 @@ git clone https://github.com/brad-cannell/DETECT-RPC-APS-BL-Dashboard.git
 cd DETECT-RPC-APS-BL-Dashboard
 ```
 
+> [!NOTE]
+> Don't clone to a cloud storage folder (Box, Dropbox, Google Drive, OneDrive, etc.)
+
 ### Step 2: Open in the IDE
 
 * Open DETECT-RPC-APS-BL-Dashboard in the IDE.
@@ -91,9 +94,16 @@ install.packages('renv')
 renv::restore()
 ```
 
+This project uses [renv](https://rstudio.github.io/renv/articles/renv.html) to manage project package dependencies. Click the link for more details.
+
 ### Step 4: Request an API Key
 
-[Add instructons](https://github.com/brad-cannell/DETECT-RPC-APS-BL-Dashboard/wiki#obtaining-a-redcap-api-token)
+[Instructions for requesting API keys](https://github.com/brad-cannell/r33_dashboards/wiki/DETECT%E2%80%90RPC-Data#accessing-data-through-api)
+
+API Keys needed:
+- DETECT-RPC Baseline Reporting Data
+    - REDCap: https://redcap.uth.tmc.edu/index.php
+    - Project: DETECT-RPC APS Reporting
 
 ### Step 4: Add Your API Key to Keyring
 
@@ -117,6 +127,13 @@ quarto render aps-dashboard.qmd
 ### Step 2: View in Browser
 
 * Open the generated HTML file in your browser. It is the file named `index.html` at the project root.
+
+### Step 3. Commit and Push to GitHub
+
+```shell
+git add .
+git commit -m "YYYY-MM-DD Dashboard Update"
+```
 
 ---
 
@@ -155,33 +172,3 @@ git push origin feature/your-feature-name
 2. Create your feature branch.
 3. Submit a Pull Request (PR) to the main repository.
 4. Clearly document your changes in the PR description.
-
----
-
-# Dashboard Updates
-
-> [!NOTE]
-> This section assumes that you have already completed all setup steps. If you haven't, please review **Quick Setup** or refer to the [wiki](https://github.com/brad-cannell/DETECT-RPC-APS-BL-Dashboard/wiki).
-
-1. Open the repository locally.
-2. Submit in terminal:
-    1. `rscript data_operations.r`
-    2. `quarto render aps-dashboard.qmd`
-3. Commit and push: "DATE Dashboard Update"
-
-Create instructions for:
-- Storing locally
-    - Don't use Box/Dropbox/Google Drive
-- Keyring
-    - Create
-    - Set
-    - Get
-- renv
-    - Set locally
-    - Use locally
-    - See the "Collaboration" section of https://rstudio.github.io/renv/articles/renv.html
-
-API Keys needed:
-- DETECT-RPC Tool Data
-    - REDCap: https://redcap.uth.tmc.edu/index.php
-    - Project: DETECT-RPC APS Reporting
