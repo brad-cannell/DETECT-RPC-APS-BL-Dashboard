@@ -4,7 +4,7 @@ author: ""
 date: today
 format:
     dashboard:
-        logo: assets/img/detect-logo.png
+        logo: assets/graphics/detect-logo.png
         theme: simplex
         output-file: index.html
         orientation: columns
@@ -21,9 +21,9 @@ library(plotly)
 library(tidyr)
 
 # source the codebook
-source("codebook.r")
+source("r/codebook.r")
 
-DATA <- fs::as_fs_path("assets/data/APS-DATA.duckdb")
+DATA <- fs::as_fs_path("data/APS-DATA.duckdb")
 
 con <- dbConnect(duckdb(), dbdir = DATA, read_only = TRUE)
 ```

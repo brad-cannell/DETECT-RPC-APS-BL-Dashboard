@@ -2,7 +2,7 @@ library(duckdb)
 library(fs)
 library(REDCapR)
 
-#### Functions
+#### Functions - pulling and storing data
 
 get_data <- function(token = keyring::key_get("aps_reports_redcap_api")) {
     redcap_read(
@@ -37,9 +37,9 @@ save_data <- function(directory) {
     on.exit(dbDisconnect(con, shutdown = TRUE))
 }
 
-#### Program Logic
+#### Program Logic and File Locations
 
-DIRECTORY <- path(path_wd(), "assets", "data")
+DIRECTORY <- path(path_wd(), "data")
 
 data <- get_data()
 save_data(directory = DIRECTORY)
