@@ -16,6 +16,9 @@
 # Session Data files
 .RData
 
+# Environment files (may contain secrets, e.g. API tokens)
+.Renviron
+
 # User-specific files
 .Ruserdata
 

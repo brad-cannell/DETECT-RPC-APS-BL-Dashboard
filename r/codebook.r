@@ -1,3 +1,5 @@
+### Obtaining and translating practicioner labels from REDCap
+
 colors_user <- c(
     "Kristina Little, MD" = "#1f3c7b",
     "Thomas Cudjoe, MD, MPH" = "#f3c300",
